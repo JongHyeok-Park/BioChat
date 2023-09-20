@@ -3,6 +3,10 @@
 - 경북대학교 컴퓨터학부 23년도 종합설계프로젝트1
   
 - 논문 학습 및 대화 챗봇 제작
+
+- [Github 링크](https://github.com/JongHyeok-Park/BioChat)
+
+- [Notion 링크](https://troubled-ocean-c3d.notion.site/BioChat-fe917ead4d9a49bd9776530ed9cdda49?pvs=4)
   
 ## 참여 기업 및 팀원
 
