@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
     overflow-y: scroll;
 }
 
@@ -15,7 +15,7 @@ div {
 
 .message-container {
     padding-top: 50px;
-    height: 80%;
+    height: 100%;
 }
 
 .message {
