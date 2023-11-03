@@ -2,8 +2,6 @@ const messageContainer = $(".message-container");
 const messageSend = $("#content");
 const sendButton = $("#send");
 
-let count = 0;
-
 messageSend.on('keydown', (e) => {
     if (e.keyCode == 13 && !(sendButton.prop("disabled"))) {
         e.preventDefault();
@@ -53,25 +51,26 @@ sendButton.click(() => {
         let target = $('.loading').parent();
         window.scrollTo(0, target.offset().top);
 
-        let response = "어쩌라구요..";
-
-        setTimeout(() => {
-            count += 1;
-            target.html(`<p>${response} ${count}</p>`);
-            window.scrollTo(0, target.offset().top);
-            sendButton.attr('disabled', false);
-        }, 2000);
-
-
-        // $.ajax({
-        //     url: 123213123,
-        //     type: "GET"
-        // }).then((res) => {
-        //     response = res.result;
-        // }).catch((err) => {
-        //     response = "Error!!";
-        // })
-
-
+        let data = { question: content };
+        $.ajax({
+            url: "http://43.202.9.254:8000/chat",
+            type: "GET",
+            data: data,
+            dataType: 'json',
+            success: function (res) {
+                let response = res.answer;
+                console.log(response);
+                target.html(`<p>${response}</p>`);
+                window.scrollTo(0, target.offset().top);
+                sendButton.attr('disabled', false);
+            },
+            error: function (err) {
+                console.log(err)
+                let response = "Error!!";
+                target.html(`<p>${response}</p>`);
+                window.scrollTo(0, target.offset().top);
+                sendButton.attr('disabled', false);
+            }
+        })
     }
 })
