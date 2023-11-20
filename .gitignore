@@ -1,2 +1,5 @@
 # MAC
 .DS_Store
+
+# config
+Frontend/public/js/config.js
