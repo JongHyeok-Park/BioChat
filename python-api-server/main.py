@@ -23,11 +23,23 @@ app.add_middleware(
 )
 infer = Inference()
 
+def remove_special_tokens(ai_prediction):
+  is_in_token = False
+  token_removed_sentence = ""
+  for i in ai_prediction:
+    if i == '<':
+      is_in_token = True
+    elif i == '>':
+      is_in_token = False
+    if i != '>' and i != '▃' and is_in_token == False:
+      token_removed_sentence += i
+  return token_removed_sentence
+    
 @api_router.post("/chat")
 async def chat_api(data: Chat):
     try:
         question = data.question
-        answer = infer.get_generated_prediction(question)
+        answer = remove_special_tokens(infer.get_generated_prediction(question))
         return {"answer" : answer}
     except Exception as e:
         logging.error("Something went wrong")
