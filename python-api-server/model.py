@@ -11,7 +11,7 @@ class Model:
     return device
   
   def load_model():
-    model = AutoModelForCausalLM.from_pretrained("microsoft/BioGPT-Large-PubMedQA")
+    model = AutoModelForCausalLM.from_pretrained("UsQuake/PubMed-AMPK_QA")
     return model
 
   def load_tokenizer():
