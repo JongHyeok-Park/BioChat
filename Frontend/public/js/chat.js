@@ -119,15 +119,22 @@ sendButton.click(() => {
         let target = $('.loading').parent();
         window.scrollTo(0, target.offset().top);
 
-        let data = { question: content };
+        let data = { "question": content };
         $.ajax({
             url: config.chatUrl + "/chat",
-            type: "GET",
-            data: data,
+            type: "POST",
+            data: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+            },
             success: function (res) {
                 let response = res.answer;
+                let result = response.replace(/<[^>]*>?/g, '');
+                result = result.replace(content, "");
+                result = result.replaceAll("▃", "");
+                result = result.trim();
                 console.log(response);
-                target.html(`<p>${response}</p>`);
+                target.html(`<p>${result}</p>`);
                 window.scrollTo(0, target.offset().top);
                 sendButton.attr('disabled', false);
             },
