@@ -47,4 +47,4 @@ async def chat_api(data: Chat):
 app.include_router(api_router)
 
 if __name__ == "__main__":
-  uvicorn.run("main:app", reload=True, port=8000, host="0.0.0.0", timeout_workers=600)
+  uvicorn.run("main:app", reload=True, port=8000, host="0.0.0.0")
