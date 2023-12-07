@@ -8,7 +8,7 @@ body {
     overflow-x: hidden;
     overflow-y: scroll;
     position: relative;
-    height: 100%;
+    min-height: 100vh;
 }
 
 div {
@@ -20,7 +20,8 @@ aside {
     height: 100vh;
     position: fixed;
     right: 0;
-    background: lightblue;
+    background: white;
+    box-shadow: 0 0 10px #eee;
     transform: translateX(300px);
     transition: all 0.7s;
     z-index: 100;

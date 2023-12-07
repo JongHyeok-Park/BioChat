@@ -18,6 +18,60 @@ login.click(function (e) {
     modalBack.css('visibility', 'visible');
 })
 
+if (getCookie("AccessToken")) {
+    login.html("Logout");
+    login.click(function (e) {
+        deleteCookie("AccessToken");
+        location.reload();
+    })
+
+    $.ajax({
+        type: "GET",
+        url: config.serverUrl + "/api/log",
+        headers: {
+            "authorization": "Bearer " + getCookie("AccessToken")
+        }
+    }).then((res) => {
+        res.data.forEach(m => {
+            let userTemplate = `<div class="message user">
+                <div class="message-inner">
+                    <div class="text">
+                        <p>${m.question}</p>
+                    </div>
+                    <div class="profile">
+                        <span class="profile-inner">
+                            <i class="fa-solid fa-user fa-2x"></i>
+                        </span>
+                    </div>
+                </div>
+                <div style="float: none; clear: both" class="end"></div>
+            </div>`;
+
+            m.answer =  m.answer.replace(`{"answer":"`, "");
+            m.answer = m.answer.replaceAll('"}', "");
+            let botTempalte = `<div class="message bot">
+                <div class="message-inner">
+                    <div class="profile">
+                        <span class="profile-inner">
+                           <i class="fa-solid fa-dna fa-2x"></i>
+                        </span>
+                    </div>
+                    <div class="text">
+                        <p>${m.answer}</p>
+                    </div>
+                    <div style="float: none; clear: both" class="end"></div>
+                </div>
+            </div>`;
+
+            messageContainer.append(userTemplate);
+            messageContainer.append(botTempalte);
+        })
+
+        let messages = $(".end");
+        window.scrollTo(0, messages.eq(messages.length - 1).offset().top);
+    })
+}
+
 modalBack.click(function (e) {
     loginModal.css('opacity', '0');
     modalBack.css('opacity', '0');
@@ -49,24 +103,13 @@ submit.on('click', function (e) {
             method: "POST",
             body: JSON.stringify(data),
         }).then(res => {
-            const token = res.headers.get("Authorization").substring(6)
+            console.log(res.headers.get("Authorization"));
+            const token = res.headers.get("Authorization").replace("Bearer ", "")
             setCookie("AccessToken", token, 60);
+            location.reload();
         }).catch(err => {
             console.log(err);
         })
-        // $.ajax({
-        //     type: 'POST',
-        //     url: 'http://43.202.9.254:8080/login',
-        //     // dataType: 'json',
-        //     data: JSON.stringify(data),
-        //     success: function (res, status, xhr) {
-        //         console.log("success");
-        //         console.log(xhr.getAllResponseHeaders());
-        //     },
-        //     error: function (err) {
-        //         console.log(err);
-        //     }
-        // })
     }
 })
 
@@ -121,11 +164,12 @@ sendButton.click(() => {
 
         let data = { "question": content };
         $.ajax({
-            url: config.chatUrl + "/chat",
+            url: config.serverUrl + "/api/chat",
             type: "POST",
             data: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json",
+                "authorization": "Bearer " + getCookie("AccessToken")
             },
             success: function (res) {
                 let response = res.answer;
