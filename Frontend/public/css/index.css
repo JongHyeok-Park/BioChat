@@ -30,6 +30,15 @@ aside {
     flex-direction: column;
 }
 
+footer {
+    padding: 20px;
+    background: #eee;
+}
+
+.main-container {
+    min-height: 100vh;
+}
+
 #toggle-btn {
     background: none;
     border: none;
@@ -179,8 +188,8 @@ aside {
 .chat-container {
     position: fixed;
     width: 100%;
-    bottom: 10px;
-    height: 100px;
+    bottom: 80px;
+    /*height: 100px;*/
 }
 
 .chat-inner {
@@ -192,7 +201,7 @@ aside {
     height: 50px;
     border-radius: 5px;
     padding: 10px 10px;
-    box-shadow: 5px 5px 5px 5px #fff;
+    box-shadow: 0 0 10px #fff;
 }
 
 .chat-inner > textarea {
@@ -211,6 +220,11 @@ aside {
 .chat-inner > button {
     background: none;
     border: none;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: black;
 }
 
 @media screen and (max-width: 830px) {
