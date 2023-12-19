@@ -43,3 +43,17 @@
 - 사용자가 제시한 논문 내용을 요약하여 제공해준다.
 
 ### Sequence Diagram
+<img width="711" alt="image" src="https://github.com/JongHyeok-Park/BioChat/assets/91305949/63f14019-da5d-4922-8b53-caa30ab31c9c">
+
+### 시스템 구조
+<img width="1037" alt="image" src="https://github.com/JongHyeok-Park/BioChat/assets/91305949/a820e0c1-2fa7-4683-bc76-8a3d8ad66e6d">
+
+### AI 모델 선정 (BioGPT-Large)
+<img width="791" alt="image" src="https://github.com/JongHyeok-Park/BioChat/assets/91305949/fe64ff14-58ee-4219-bfbf-34cde484a154">
+
+### Fine-Tuned Model Accuracy
+<img width="700" alt="image" src="https://github.com/JongHyeok-Park/BioChat/assets/91305949/cf1294e9-6084-4271-b1c5-e84591cf03da">
+
+
+
+
